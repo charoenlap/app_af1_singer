@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>รับสินค้า</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <div class="title">ลายเซนต์</div>
+  <ion-row [ngClass]="{'drawing-active': isDrawing}">
+    <ion-col></ion-col>
+    <ion-col>
+      <signature-pad #signatureCanvas [options]="signaturePadOptions" id = "signatureCanvas" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button color="primary" (click)="AccessCamera()"><ion-icon name="camera"> Camera</ion-icon></ion-button>
+      <ion-button color="primary" (click)="AccessGallery()"><ion-icon name="image"> Gallery</ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <img [src]="base64Image" *ngIf="base64Image" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-input [(ngModel)]="kycNo" name="kycNo" type="text" placeholder="ใส่หมายเลข KYC" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-input [(ngModel)]="comment" name="comment" type="text" placeholder="หมายเหตุ ชื่อผู้เซนต์รับของ" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" (click)="savePad()" expand="full">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,52 @@
+<ion-content>
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+	    <ion-refresher-content
+	      pullingIcon="arrow-dropdown"
+	      pullingText="Pull to refresh"
+	      refreshingSpinner="circles"
+	      refreshingText="Refreshing...">
+	    </ion-refresher-content>
+	  </ion-refresher>
+	<!-- <ion-searchbar ></ion-searchbar> -->
+	<ion-grid >
+	  	<ion-row>
+	    	<ion-col size="12">
+				<ion-button color="dark" expand="full" routerLink="/members/scan-job">เพิ่ม/แก้ไข connote</ion-button>
+	    	</ion-col>
+	    </ion-row>
+	</ion-grid>
+    <ion-list lines="full">
+      <ion-item  *ngFor="let send of sends"  routerLink="/members/send-detail/{{send.id_jobs}}">
+      	<ion-icon slot="start" color="{{send.text}}" name="mail"></ion-icon>
+      	<ion-grid>
+		  	<ion-row> 
+		    	<ion-col size="12">
+			        <ion-row >
+			        	<ion-col size="12">
+							<ion-label><b>{{send.key}}</b> {{send.consignee_company}}</ion-label>
+			        	</ion-col>
+			        	<ion-col size="12">
+							<ion-label>{{send.customer_name}}</ion-label>
+			        	</ion-col>
+			        	<ion-col size="12">
+							<ion-label>{{send.address}}</ion-label>
+			        	</ion-col>
+			        	<ion-col size="12">
+			        		<ion-label>{{send.district}} {{send.province}} {{send.postcode}}</ion-label>
+			        	</ion-col>
+			        	<ion-col size="12">
+			        		<ion-label>จำนวนสินค้า: {{send.unit}}</ion-label>
+			        	</ion-col>
+			        	<ion-col size="12">
+			        		<ion-label><b>{{send.service}}</b> {{send.status}}</ion-label>
+			        	</ion-col>
+			        </ion-row>
+		    	</ion-col><!-- 
+		    	<ion-col size="2">
+					<ion-button  color="primary" size="small" expand="full" ><ion-icon name="eye"></ion-icon></ion-button>
+		    	</ion-col> -->
+			</ion-row>
+		</ion-grid>
+      </ion-item>
+    </ion-list>
+</ion-content>

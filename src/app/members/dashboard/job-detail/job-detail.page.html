@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-buttons slot="start">
+      <ion-button color="warning" expand="full" (click)="listJob()">< กลับ</ion-button>
+    </ion-buttons>
+    <ion-title>รับสินค้า {{detail.key}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card>
+	  <ion-card-content>
+	    <ion-grid >
+	        <ion-row>
+	        	<ion-col size="6">
+					<ion-label>{{detail.person}}</ion-label>
+	        	</ion-col>
+	        	<ion-col size="6">
+	        		<ion-label>
+	        			<a button icon-start ion-button full (click)="callNow(detail.mobile)">
+						    <ion-icon name="call"></ion-icon>
+						    <i class="icon ion-ios-telephone"></i> <strong>{{detail.mobile}}</strong>
+					    </a>
+					</ion-label>
+	        	</ion-col>
+	        	<ion-col size="12">
+					<ion-label>{{detail.customer_name}}</ion-label>
+	        	</ion-col>
+	        	<ion-col size="12">
+	        		<ion-label>{{detail.district}} {{detail.province}} {{detail.postcode}}</ion-label>
+	        	</ion-col>
+	        	<ion-col size="12">
+					<ion-label>เวลารับสินค้า {{detail.get_datetime}}</ion-label>
+	        	</ion-col>
+	        </ion-row>
+	        <ion-row *ngIf="detail.status == 'new'">
+				<ion-col size="5">
+					<ion-button color="danger" expand="full" (click)="notAccept(detail.id)">ไม่รับ</ion-button>
+	        	</ion-col>
+	        	<ion-col size="7">
+					<ion-button color="primary" expand="full" (click)="accept()">รับ</ion-button>
+	        	</ion-col>
+	        </ion-row>
+		</ion-grid>
+	  </ion-card-content>
+	</ion-card>
+	<ion-card>
+	  	<ion-card-content>
+	    	<ion-grid >
+	    		<ion-row>
+			    	<ion-col size="12">
+			    		<b>จำนวน connote ทั้งหมด {{count_connotes}} connote</b>
+			    	</ion-col>
+			    </ion-row>
+
+	    		<ion-row *ngIf="detail.status == 'inprogress'">
+		        	<ion-col size="12">
+						<ion-button color="dark" expand="full" routerLink="/members/scan/{{id_booking}}">เพิ่ม/แก้ไข connote</ion-button>
+		        	</ion-col>
+		        </ion-row>
+	    		
+			    
+				<ion-row *ngIf="detail.status == 'inprogress'">
+		        	<ion-col size="6">
+						<ion-button color="danger" expand="full" (click)="jobCancle()">ยกเลิก</ion-button>
+		        	</ion-col>
+		        	<ion-col size="6">
+						<ion-button color="primary" expand="full" (click)="jobConfirm(detail.id_booking)">ยืนยันรับสินค้า</ion-button>
+		        	</ion-col>
+		        </ion-row>
+		        <ion-row *ngIf="detail.status == 'pending'">
+		        	<ion-col size="12">
+						<ion-button color="danger" expand="full"  routerLink="/members/dashboard/job">คลิกที่นี่เพื่อย้อนกลับ</ion-button>
+		        	</ion-col>
+		        </ion-row>
+	        </ion-grid>
+	  	</ion-card-content>
+	</ion-card>
+</ion-content>

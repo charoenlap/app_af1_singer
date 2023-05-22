@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-buttons slot="start">
+      <ion-button color="warning" expand="full" routerLink="/members/dashboard/send">< กลับ</ion-button>
+    </ion-buttons>
+    <ion-title>ส่งสินค้า</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-card>
+	  <ion-card-content>
+	    <ion-grid >
+	        <ion-row>
+	        	<ion-col size="12">
+					<ion-label>{{detail.person}}</ion-label>
+	        	</ion-col>
+	        	<ion-col size="12">
+					<ion-label>{{detail.address}}</ion-label>
+	        	</ion-col>
+	        	<ion-col size="12">
+	        		<ion-label>{{detail.district}} {{detail.province}} {{detail.postcode}}</ion-label>
+	        	</ion-col>
+	        </ion-row>
+	        <ion-row *ngIf="detail.status == 'new'">
+				<ion-col size="5">
+					<ion-button color="danger" expand="full" (click)="notAccept(detail.id)">ไม่รับ</ion-button>
+	        	</ion-col>
+	        	<ion-col size="7">
+					<ion-button color="primary" expand="full" (click)="accept()">รับ</ion-button>
+	        	</ion-col>
+	        </ion-row>
+		</ion-grid>
+	  </ion-card-content>
+	</ion-card>
+	<ion-card>
+	  	<ion-card-content>
+	    	<ion-grid >
+			    <ion-item *ngFor="let result of connote_new">
+		    		<ion-row>
+			        	<ion-col size="12">
+							<ion-label>{{result}}</ion-label>
+			        	</ion-col>
+			        </ion-row>
+			    </ion-item>
+			    
+				<ion-row *ngIf="detail.status == 'inprogress'">
+		        	<ion-col size="6">
+						<ion-button color="danger" expand="full" (click)="sendCancle()">ยกเลิก</ion-button>
+		        	</ion-col>
+		        	<ion-col size="6">
+						<ion-button color="primary" expand="full" (click)="sendConfirm(detail.id_jobs)">ยืนยัน</ion-button>
+		        	</ion-col>
+		        </ion-row>
+		        <ion-row *ngIf="detail.status == 'pending'">
+		        	<ion-col size="12">
+						<ion-button color="danger" expand="full"  routerLink="/members/dashboard/send">คลิกที่นี่เพื่อย้อนกลับ</ion-button>
+		        	</ion-col>
+		        </ion-row>
+	        </ion-grid>
+	  	</ion-card-content>
+	</ion-card>
+</ion-content>
